@@ -39,6 +39,19 @@ jobs:
           docker build -t $DOCKER_USERNAME/$DOCKER_IMAGE_NAME:$DOCKER_IMAGE_TAG .
           docker push $DOCKER_USERNAME/$DOCKER_IMAGE_NAME:$DOCKER_IMAGE_TAG
 
+      - name: Debug SSH Connection
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ env.SERVER_HOST }}
+          username: ${{ env.SERVER_USERNAME }}
+          key: ${{ env.SSH_PRIVATE_KEY }}
+          script: |
+            echo "✅ SSH connection successful!"
+            whoami
+            hostname
+            uptime
+            ls -la $HOME
+
       - name: Deploy Docker image and Redis to server
         uses: appleboy/ssh-action@master
         with:
@@ -46,17 +59,27 @@ jobs:
           username: ${{ env.SERVER_USERNAME }}
           key: ${{ env.SSH_PRIVATE_KEY }}
           script: |
-            # Redis-ni ishga tushirish (agar ishlamayotgan bo'lsa)
+            set -x  # Debug rejimni yoqish (barcha buyruqlarni ekranga chiqaradi)
+
+            echo "📌 Checking running Docker containers..."
+            docker ps -a
+
+            echo "📌 Checking existing Redis container..."
+            docker ps | grep redis || echo "🚨 Redis is not running!"
+
+            echo "📌 Stopping and removing old bot container..."
+            docker stop education || echo "ℹ️ No running education container."
+            docker rm education || echo "ℹ️ No existing education container."
+
+            echo "📌 Removing old bot image..."
+            docker image rm $DOCKER_USERNAME/$DOCKER_IMAGE_NAME:$DOCKER_IMAGE_TAG || echo "ℹ️ No existing image to remove."
+
+            echo "📌 Running Redis container..."
             docker ps | grep redis || docker run -d --name redis \
               -e REDIS_PASSWORD=${{ env.REDIS_PASSWORD }} \
               -p 6379:6379 redis:latest --requirepass ${{ env.REDIS_PASSWORD }}
 
-            # Eski botni to‘xtatish va o‘chirish
-            docker stop education || true
-            docker rm education || true
-            docker image rm $DOCKER_USERNAME/$DOCKER_IMAGE_NAME:$DOCKER_IMAGE_TAG || true
-
-            # Yangi botni Redis bilan birga ishga tushirish
+            echo "📌 Deploying new bot container..."
             docker run -d --name education \
               -e TELEGRAM_TOKEN=${{ env.TELEGRAM_TOKEN }} \
               -e POSTGRES_HOST=${{ env.DATABASE_HOST }} \
@@ -66,3 +89,5 @@ jobs:
               -e REDIS_PORT=${{ env.REDIS_PORT }} \
               -e REDIS_PASSWORD=${{ env.REDIS_PASSWORD }} \
               $DOCKER_USERNAME/$DOCKER_IMAGE_NAME:$DOCKER_IMAGE_TAG
+
+            echo "✅ Deployment completed!"
