@@ -52,7 +52,7 @@ type Minio struct {
 	SecretAccessKey string
 	Secure          bool
 }
-//command
+
 func Load() *Config {
 	if err := godotenv.Load("config/.env"); err != nil {
 		fmt.Println("NO .env file  not found")
