@@ -67,10 +67,10 @@ func Load() *Config {
 		Password: cast.ToString(getOrDefaultValue("POSTGRES_PASSWORD", "max22012004")),
 		DataBase: cast.ToString(getOrDefaultValue("POSTGRES_DATABASE", "comics"))}
 	cfg.Redis = Redis{
-		Host:     cast.ToString(getOrDefaultValue("REDIS_HOST", "localhost")),
+		Host:     cast.ToString(getOrDefaultValue("REDIS_HOST", "62.171.149.94")),
 		Port:     cast.ToInt(getOrDefaultValue("REDIS_PORT", "6379")),
 		Password: cast.ToString(getOrDefaultValue("REDIS_PASSWORD", "")),
-		DataBase: cast.ToInt(getOrDefaultValue("REDIS_DATABASE", "0")),}
+		DataBase: cast.ToInt(getOrDefaultValue("REDIS_DATABASE", "0"))}
 
 	cfg.Minio = Minio{
 		Host:            cast.ToString(getOrDefaultValue("MINIO_HOST", "3.123.128.20")),

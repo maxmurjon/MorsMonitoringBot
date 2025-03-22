@@ -104,7 +104,7 @@
   and deadlines. See
   [Redis Timeouts](https://redis.uptrace.dev/guide/go-redis-debugging.html#timeouts) for details.
 - Added `ParseClusterURL` to parse URLs into `ClusterOptions`, for example,
-  `redis://user:password@localhost:6789?dial_timeout=3&read_timeout=6s&addr=localhost:6790&addr=localhost:6791`.
+  `redis://user:password@62.171.149.94:6789?dial_timeout=3&read_timeout=6s&addr=62.171.149.94:6790&addr=62.171.149.94:6791`.
 - Added metrics instrumentation using `redisotel.IstrumentMetrics`. See
   [documentation](https://redis.uptrace.dev/guide/go-redis-monitoring.html)
 - Added `redis.HasErrorPrefix` to help working with errors.

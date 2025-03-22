@@ -160,7 +160,7 @@ type Options struct {
 
 func (opt *Options) init() {
 	if opt.Addr == "" {
-		opt.Addr = "localhost:6379"
+		opt.Addr = "62.171.149.94:6379"
 	}
 	if opt.Network == "" {
 		if strings.HasPrefix(opt.Addr, "/") {
@@ -270,11 +270,11 @@ func NewDialer(opt *Options) func(context.Context, string, string) (net.Conn, er
 //
 // Examples:
 //
-//	redis://user:password@localhost:6789/3?dial_timeout=3&db=1&read_timeout=6s&max_retries=2
+//	redis://user:password@62.171.149.94:6789/3?dial_timeout=3&db=1&read_timeout=6s&max_retries=2
 //	is equivalent to:
 //	&Options{
 //		Network:     "tcp",
-//		Addr:        "localhost:6789",
+//		Addr:        "62.171.149.94:6789",
 //		DB:          1,               // path "/3" was overridden by "&db=1"
 //		DialTimeout: 3 * time.Second, // no time unit = seconds
 //		ReadTimeout: 6 * time.Second,
@@ -330,7 +330,7 @@ func setupTCPConn(u *url.URL) (*Options, error) {
 }
 
 // getHostPortWithDefaults is a helper function that splits the url into
-// a host and a port. If the host is missing, it defaults to localhost
+// a host and a port. If the host is missing, it defaults to 62.171.149.94
 // and if the port is missing, it defaults to 6379.
 func getHostPortWithDefaults(u *url.URL) (string, string) {
 	host, port, err := net.SplitHostPort(u.Host)
@@ -338,7 +338,7 @@ func getHostPortWithDefaults(u *url.URL) (string, string) {
 		host = u.Host
 	}
 	if host == "" {
-		host = "localhost"
+		host = "62.171.149.94"
 	}
 	if port == "" {
 		port = "6379"

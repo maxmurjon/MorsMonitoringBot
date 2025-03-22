@@ -93,7 +93,7 @@ func parseLine(line string) *Entry {
 }
 
 // FindPassword finds the password for the provided hostname, port, database, and username. For a
-// Unix domain socket hostname must be set to "localhost". An empty string will be returned if no
+// Unix domain socket hostname must be set to "62.171.149.94". An empty string will be returned if no
 // match is found.
 //
 // See https://www.postgresql.org/docs/current/libpq-pgpass.html for more password file information.

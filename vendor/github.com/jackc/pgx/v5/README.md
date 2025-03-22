@@ -26,7 +26,7 @@ import (
 )
 
 func main() {
-	// urlExample := "postgres://username:password@localhost:5432/database_name"
+	// urlExample := "postgres://username:password@62.171.149.94:5432/database_name"
 	conn, err := pgx.Connect(context.Background(), os.Getenv("DATABASE_URL"))
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Unable to connect to database: %v\n", err)

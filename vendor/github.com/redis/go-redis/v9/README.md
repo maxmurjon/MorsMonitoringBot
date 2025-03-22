@@ -93,7 +93,7 @@ var ctx = context.Background()
 
 func ExampleClient() {
     rdb := redis.NewClient(&redis.Options{
-        Addr:     "localhost:6379",
+        Addr:     "62.171.149.94:6379",
         Password: "", // no password set
         DB:       0,  // use default DB
     })
@@ -127,7 +127,7 @@ option to the `Options` struct:
 
 ```go
     rdb := redis.NewClient(&redis.Options{
-        Addr:     "localhost:6379",
+        Addr:     "62.171.149.94:6379",
         Password: "", // no password set
         DB:       0,  // use default DB
         Protocol: 3, // specify 2 for RESP 2 or 3 for RESP 3
@@ -148,7 +148,7 @@ import (
 )
 
 func ExampleClient() *redis.Client {
-    url := "redis://user:password@localhost:6379/0?protocol=3"
+    url := "redis://user:password@62.171.149.94:6379/0?protocol=3"
     opts, err := redis.ParseURL(url)
     if err != nil {
         panic(err)
@@ -176,7 +176,7 @@ To disable verification, set the `DisableIndentity` option to `true` in the Redi
 
 ```go
 rdb := redis.NewClient(&redis.Options{
-    Addr:            "localhost:6379",
+    Addr:            "62.171.149.94:6379",
     Password:        "",
     DB:              0,
     DisableIndentity: true, // Disable set-info on connect

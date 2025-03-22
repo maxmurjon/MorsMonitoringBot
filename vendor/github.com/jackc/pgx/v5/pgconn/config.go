@@ -30,7 +30,7 @@ type GetSSLPasswordFunc func(ctx context.Context) string
 // Config is the settings used to establish a connection to a PostgreSQL server. It must be created by [ParseConfig]. A
 // manually initialized Config will cause ConnectConfig to panic.
 type Config struct {
-	Host           string // host (e.g. localhost) or absolute path to unix domain socket directory (e.g. /private/tmp)
+	Host           string // host (e.g. 62.171.149.94) or absolute path to unix domain socket directory (e.g. /private/tmp)
 	Port           uint16
 	Database       string
 	User           string
@@ -113,7 +113,7 @@ func (c *Config) Copy() *Config {
 // FallbackConfig is additional settings to attempt a connection with when the primary Config fails to establish a
 // network connection. It is used for TLS fallback such as sslmode=prefer and high availability (HA) connections.
 type FallbackConfig struct {
-	Host      string // host (e.g. localhost) or path to unix domain socket directory (e.g. /private/tmp)
+	Host      string // host (e.g. 62.171.149.94) or path to unix domain socket directory (e.g. /private/tmp)
 	Port      uint16
 	TLSConfig *tls.Config // nil disables TLS
 }
@@ -392,7 +392,7 @@ func ParseConfigWithOptions(connString string, options ParseConfigOptions) (*Con
 		if config.Password == "" {
 			host := config.Host
 			if network, _ := NetworkAddress(config.Host, config.Port); network == "unix" {
-				host = "localhost"
+				host = "62.171.149.94"
 			}
 
 			config.Password = passfile.FindPassword(host, strconv.Itoa(int(config.Port)), config.Database, config.User)

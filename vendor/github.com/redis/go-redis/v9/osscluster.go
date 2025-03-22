@@ -172,10 +172,10 @@ func (opt *ClusterOptions) init() {
 //
 // Example:
 //
-//	redis://user:password@localhost:6789?dial_timeout=3&read_timeout=6s&addr=localhost:6790&addr=localhost:6791
+//	redis://user:password@62.171.149.94:6789?dial_timeout=3&read_timeout=6s&addr=62.171.149.94:6790&addr=62.171.149.94:6791
 //	is equivalent to:
 //	&ClusterOptions{
-//		Addr:        ["localhost:6789", "localhost:6790", "localhost:6791"]
+//		Addr:        ["62.171.149.94:6789", "62.171.149.94:6790", "62.171.149.94:6791"]
 //		DialTimeout: 3 * time.Second, // no time unit = seconds
 //		ReadTimeout: 6 * time.Second,
 //	}
